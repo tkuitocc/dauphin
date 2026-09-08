@@ -125,7 +125,7 @@ struct CourseDetailView: View {
                             String(course.room[$0]).uppercased()
                         } ?? "ZZZ"
 
-                    LandmarkView(coordinate: letterToCoordinate(for: code))
+                    LandmarkView(layout: .hstack, coordinate: letterToCoordinate(for: code))
 
                 }.padding(24)
 

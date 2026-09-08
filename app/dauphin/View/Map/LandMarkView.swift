@@ -1,23 +1,38 @@
 @preconcurrency import MapKit
 import SwiftUI
 
+enum LandmarkViewLayout: String, CaseIterable {
+    case hstack
+    case vstack
+}
+
 struct LandmarkView: View {
+    let layout: LandmarkViewLayout
     let coordinate: CLLocationCoordinate2D
     let didReturnToList: (() -> Void)?
     @Environment(\.openURL) private var openURL
 
     @State private var lookAroundScene: MKLookAroundScene?
 
-    init(coordinate: CLLocationCoordinate2D, didReturnToList: (() -> Void)? = nil) {
+    init(layout: LandmarkViewLayout, coordinate: CLLocationCoordinate2D, didReturnToList: (() -> Void)? = nil) {
+        self.layout = layout
         self.coordinate = coordinate
         self.didReturnToList = didReturnToList
     }
 
     var body: some View {
         VStack(spacing: 16) {
-            HStack(spacing: 12) {
-                mapPreview
-                lookAroundPreview
+            switch layout {
+            case .hstack:
+                HStack(spacing: 12) {
+                    mapPreview
+                    lookAroundPreview
+                }
+            case .vstack:
+                VStack(spacing: 12) {
+                    mapPreview
+                    lookAroundPreview
+                }
             }
 
             Button {
@@ -78,6 +93,7 @@ struct LandmarkView: View {
 #Preview("LandmarkView") {
     List {
         LandmarkView(
+            layout: .hstack,
             coordinate: CLLocationCoordinate2D(
                 latitude: 25.17512531057652, longitude: 121.45075846007681))
     }
