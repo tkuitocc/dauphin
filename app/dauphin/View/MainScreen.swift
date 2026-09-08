@@ -11,6 +11,10 @@ struct MainScreen: View {
                     CourseScheduleView(authViewModel: viewModel)
                 }
 
+                Tab("Campus Map", systemImage: "map.fill") {
+                    MapView()
+                }
+                
                 Tab("Other", systemImage: "chart.line.text.clipboard") {
                     OtherView(authViewModel: viewModel)
                 }
@@ -24,6 +28,11 @@ struct MainScreen: View {
                 CourseScheduleView(authViewModel: viewModel)
                     .tabItem {
                         Label("Course", systemImage: "calendar.day.timeline.left")
+                    }
+
+                MapView()
+                    .tabItem {
+                        Label("Campus Map", systemImage: "map.fill")
                     }
 
                 OtherView(authViewModel: viewModel)
