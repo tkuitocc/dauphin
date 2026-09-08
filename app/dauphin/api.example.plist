@@ -7,7 +7,7 @@
 		<key>IV</key>
 		<string>AES256IV</string>
 		<key>KEY</key>
-		<string>AES265KEY</string>
+		<string>AES256KEY</string>
 	</dict>
 </dict>
 </plist>

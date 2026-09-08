@@ -97,7 +97,7 @@ jobs:
             -scheme "dauphin" \
             -testPlan Models \
             -configuration Debug \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -destination 'platform=iOS Simulator,name=iPhone 17' \
             -clonedSourcePackagesDirPath "${{ github.workspace }}/.spm" \
             -resultBundlePath TestResults.xcresult \
             test | xcbeautify --renderer github-actions --report junit --report-path reports/junit.xml
@@ -125,7 +125,7 @@ jobs:
           {
             echo "## test"
             echo "- Status: ${{ job.status }}"
-            echo "- Destination: iPhone 16"
+            echo "- Destination: iPhone 17"
             echo "- Result bundle: TestResults.xcresult"
             echo "- JUnit report: reports/junit.xml"
           } >> "$GITHUB_STEP_SUMMARY"
