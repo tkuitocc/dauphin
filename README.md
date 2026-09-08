@@ -22,6 +22,10 @@ Dauphin is an iOS app with a companion Widget extension. The codebase is organiz
 2. Open `dauphin.xcodeproj` in Xcode.
 3. Select the `dauphin` scheme and build/run.
 
+### Xcode Cloud
+
+Define `AES256KEY` and `AES256IV` as secret custom environment variables in the workflow. The post-clone script generates the ignored `dauphin/api.plist` from `dauphin/api.example.plist` before Xcode builds the app.
+
 ## Common Commands
 
 ```sh
