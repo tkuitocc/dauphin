@@ -12,6 +12,34 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+      - name: Add plist file
+        env:
+          AES256KEY: ${{ secrets.DAUPHIN_IOS_AES256KEY }}
+          AES256IV: ${{ secrets.DAUPHIN_IOS_AES256KIV }}
+        run: |
+          set -eu
+
+          : "${AES256KEY:?Set AES256KEY in the Xcode Cloud workflow environment}"
+          : "${AES256IV:?Set AES256IV in the Xcode Cloud workflow environment}"
+
+          script_directory="$GITHUB_WORKSPACE"
+          template_path="${script_directory}/app/dauphin/api.example.plist"
+          output_path="${script_directory}/app/dauphin/api.plist"
+          temporary_path="$(mktemp "${output_path}.XXXXXX")"
+
+          cleanup() {
+              rm -f "$temporary_path"
+          }
+          trap cleanup EXIT HUP INT TERM
+
+          cp "$template_path" "$temporary_path"
+          /usr/bin/plutil -replace AES.KEY -string "$AES256KEY" "$temporary_path"
+          /usr/bin/plutil -replace AES.IV -string "$AES256IV" "$temporary_path"
+          /usr/bin/plutil -lint "$temporary_path"
+          mv "$temporary_path" "$output_path"
+          trap - EXIT HUP INT TERM
+
+          echo "Generated dauphin/api.plist for the GitHub Actions workflow."
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
