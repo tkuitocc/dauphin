@@ -15,6 +15,8 @@ struct L2GData: Identifiable {
 }
 
 let letterLocations: [String: L2GData] = [
+    "-": L2GData(
+        code: "ZZZ", name: "書卷廣場", coordinate: .init(latitude: 25.17553, longitude: 121.45063)),
     "A": L2GData(code: "A", name: "行政大樓", coordinate: .init(latitude: 25.175, longitude: 121.449)),
     "B": L2GData(code: "B", name: "商管大樓", coordinate: .init(latitude: 25.1765, longitude: 121.45)),
     "C": L2GData(
@@ -60,15 +62,13 @@ let letterLocations: [String: L2GData] = [
         code: "XC", name: "五虎崗綜合球場", coordinate: .init(latitude: 25.17552, longitude: 121.45366)),
     "Z": L2GData(
         code: "Z", name: "松濤館", coordinate: .init(latitude: 25.174967, longitude: 121.452078)),
-    "ZZZ": L2GData(
-        code: "ZZZ", name: "書卷廣場", coordinate: .init(latitude: 25.17553, longitude: 121.45063)),
 ]
 
 private let defaultCoord = CLLocationCoordinate2D(latitude: 25.0478, longitude: 121.5170)
 
-let campusLocations: [L2GData] = letterLocations.values.sorted { lhs, rhs in
-    lhs.code.localizedStandardCompare(rhs.code) == .orderedAscending
-}
+let campusLocations: [L2GData] = letterLocations.sorted { lhs, rhs in
+    lhs.key.localizedStandardCompare(rhs.key) == .orderedAscending
+}.map { $0.value }
 
 func letterToCoordinate(for letter: String) -> CLLocationCoordinate2D {
     letterLocations[letter]?.coordinate ?? defaultCoord
