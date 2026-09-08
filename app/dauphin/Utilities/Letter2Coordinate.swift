@@ -62,6 +62,8 @@ let letterLocations: [String: L2GData] = [
         code: "XC", name: "五虎崗綜合球場", coordinate: .init(latitude: 25.17552, longitude: 121.45366)),
     "Z": L2GData(
         code: "Z", name: "松濤館", coordinate: .init(latitude: 25.174967, longitude: 121.452078)),
+    "ZF": L2GData(
+        code: "ZF", name: "淡江國際學園", coordinate: .init(latitude: 25.1776015, longitude: 121.4428487)),
 ]
 
 private let defaultCoord = CLLocationCoordinate2D(latitude: 25.0478, longitude: 121.5170)
