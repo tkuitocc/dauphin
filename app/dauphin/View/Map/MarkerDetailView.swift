@@ -41,7 +41,15 @@ struct MarkerDetailView: View {
                         }
                     }
 
-                    Text(location.code).font(.subheadline).foregroundStyle(.secondary)
+                    Text(
+                        verbatim: (
+                            location.code == "ZZZ"
+                                ? ""
+                                : location.code
+                        )
+                    )
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
 
                     LandmarkView(
                         layout: landmarkViewLayout,
