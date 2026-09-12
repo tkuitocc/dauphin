@@ -11,7 +11,7 @@ jobs:
     runs-on: macOS-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Add plist file
         env:
           AES256KEY: ${{ secrets.DAUPHIN_IOS_AES256KEY }}
@@ -41,14 +41,14 @@ jobs:
 
           echo "Generated dauphin/api.plist for the GitHub Actions workflow."
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'zulu'
           java-version: 21
       - name: Set Xcode version
         run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
       - name: iOS debug build
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 15
           max_attempts: 5
@@ -61,13 +61,13 @@ jobs:
           zip -r iosApp_debug.ipa Payload
           rm -rf Payload
       - name: Upload artifacts - iosapp_debug.ipa
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: iosapp_debug.ipa
           path: ./iosApp_debug.ipa
           if-no-files-found: ignore
       - name: iOS release build
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 15
           max_attempts: 5
@@ -80,7 +80,7 @@ jobs:
           zip -r iosApp_release.ipa Payload
           rm -rf Payload
       - name: Upload artifacts - iosApp_release.ipa
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: iosapp_release.ipa
           path: ./iosApp_release.ipa
