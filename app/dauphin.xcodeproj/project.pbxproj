@@ -121,6 +121,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				AppIconDev.icon,
+				AssetsDev.xcassets,
 				Info.plist,
 			);
 			target = 18B368182CE5FA110027FEBE /* dauphin */;
